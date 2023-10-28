@@ -20,6 +20,16 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
+
+        let selectedPost = posts[selectedIndexPath.row]
+        
+        guard let detailViewController = segue.destination as? DetailViewController else { return }
+
+        detailViewController.post = selectedPost
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
